@@ -9,8 +9,8 @@ class Criptografia(object):
         m = c**d % n
         return m
 
-    def encripta_mensagem(self):
-        s = input("Digite a mensagem: \t")
+    def encripta_mensagem(self, data):
+        s = input(data)
         print('='*5 + ' Digite as chaves públicas: ' + '='*5)
         e = int(input("Chave e: \t"))
         n = int(input("Chave n: \t")) 

@@ -1,6 +1,4 @@
 import socket
-
-
 from numeroPrimo import GeradorNumeroPrimo
 from gerarChaves import Chaves
 from criptografia import Criptografia
@@ -16,8 +14,6 @@ print('\n Q :',str(numero_q))
 chaves = Chaves(numero_p, numero_q)
 chaves.gerar_chaves()
 
-encripta = chaves.encripta_mensagem()
-chaves.decripta_mensagem(encripta)
 
 def server_program():
     # get the hostname
@@ -35,12 +31,13 @@ def server_program():
     while True:
         # receive data stream. it won't accept data packet greater than 1024by
         data = conn.recv(1024).decode()
+        encripta = chaves.encripta_mensagem(data)
         if not data:
             # if data is not received break
             break
         print("from connected user: " + str(data))
         data = input(" -> ")
-        conn.send(data.encode())  # send data to the client
+        conn.send(encripta.encode())  # send data to the client
 
     conn.close()  # close the connection
 
